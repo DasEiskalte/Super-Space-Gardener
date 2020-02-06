@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/playerAnimations.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/player.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.2469, 31.6692 )
@@ -10,17 +11,18 @@ extents = Vector2( 32.2469, 31.6692 )
 [node name="TileMap" type="TileMap" parent="."]
 format = 1
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="player" type="KinematicBody2D" parent="."]
 position = Vector2( 201.183, 119.936 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="playerCollision" type="CollisionShape2D" parent="player"]
 position = Vector2( 297.723, 143.258 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="playerSprite" type="AnimatedSprite" parent="player"]
 position = Vector2( 297.774, 143.774 )
 frames = ExtResource( 1 )
 animation = "standing"
