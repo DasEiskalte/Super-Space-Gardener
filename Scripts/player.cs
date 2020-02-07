@@ -1,29 +1,30 @@
 using Godot;
 using System;
 
-public class Movement : KinematicBody2D
+public class Player : KinematicBody2D
 {
-	public int speed = 200;
-	Vector2 velocity = new Vector2();
+	public int speed = 300
+		;
+	private Vector2 direction = new Vector2();
 	
 	public void GetInput()
 	{
-		velocity = new Vector2();
+		direction = new Vector2();
 		
-		if(Input.IsActionPressed("ui_right"))
+		if(Input.IsActionPressed("right"))
 		{
-			velocity.x += 1;
+			direction.x += 1;
 		}
-		if(Input.IsActionPressed("ui_left"))
+		if(Input.IsActionPressed("left"))
 		{
-			velocity.x -= 1;
+			direction.x -= 1;
 		}
-		velocity = velocity.Normalized() * speed;
 	}
 	
 	public override void _PhysicsProcess(float delta)
 	{
 		GetInput();
-		velocity = MoveAndSlide(velocity);
+
+		MoveAndSlide(direction.Normalized() * speed);
 	}
 }
