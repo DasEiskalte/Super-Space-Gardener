@@ -3,8 +3,8 @@ using System;
 
 public class Player : KinematicBody2D
 {
-	public int speed = 300
-		;
+	public int Speed = 30;
+	
 	private Vector2 direction = new Vector2();
 	
 	public void GetInput()
@@ -25,6 +25,6 @@ public class Player : KinematicBody2D
 	{
 		GetInput();
 
-		MoveAndSlide(direction.Normalized() * speed);
+		MoveAndSlide(direction.Normalized() * Speed);
 	}
 }
