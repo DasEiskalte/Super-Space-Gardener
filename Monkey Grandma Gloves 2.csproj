@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B81D59B-5557-40D7-A44F-E96F852AD858}</ProjectGuid>
+    <ProjectGuid>{3E50817E-3EC0-4A28-A895-DD4A8FB3D078}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
-    <RootNamespace>MonkeyGrandmaGloves</RootNamespace>
-    <AssemblyName>Monkey Grandma Gloves</AssemblyName>
+    <RootNamespace>MonkeyGrandmaGloves2</RootNamespace>
+    <AssemblyName>Monkey Grandma Gloves 2</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <GodotProjectGeneratorVersion>1.0.7333.3918</GodotProjectGeneratorVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
@@ -53,8 +53,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KinematicBody2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\player.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

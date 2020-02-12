@@ -21,7 +21,7 @@ public class Player : KinematicBody2D
 		}
 	}
 	
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(float _delta)
 	{
 		GetInput();
 
