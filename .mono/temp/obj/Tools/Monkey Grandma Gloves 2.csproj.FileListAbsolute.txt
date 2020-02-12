@@ -1,5 +1,0 @@
-C:\Users\Yannis\Documents\Monkey Grandma Gloves 2\.mono\temp\bin\Tools\Monkey Grandma Gloves 2.dll
-C:\Users\Yannis\Documents\Monkey Grandma Gloves 2\.mono\temp\bin\Tools\Monkey Grandma Gloves 2.pdb
-C:\Users\Yannis\Documents\Monkey Grandma Gloves 2\.mono\temp\obj\Tools\Monkey Grandma Gloves 2.csprojAssemblyReference.cache
-C:\Users\Yannis\Documents\Monkey Grandma Gloves 2\.mono\temp\obj\Tools\Monkey Grandma Gloves 2.dll
-C:\Users\Yannis\Documents\Monkey Grandma Gloves 2\.mono\temp\obj\Tools\Monkey Grandma Gloves 2.pdb
