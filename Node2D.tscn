@@ -108,6 +108,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -286,7 +287,7 @@ __meta__ = {
 speed = 400
 speedSprint = 800
 gravity = 300
-jump = -10000
+jump = 10000
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 position = Vector2( 525, 290 )
@@ -300,4 +301,3 @@ shape = SubResource( 2 )
 tile_set = SubResource( 30 )
 format = 1
 tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 6, 0, 3, 7, 0, 3, 8, 0, 3, 9, 0, 3, 10, 0, 3, 11, 0, 3, 12, 0, 3, 13, 0, 3, 14, 0, 3, 15, 0, 3, 65536, 0, 3, 65551, 0, 3, 131072, 0, 3, 131087, 0, 3, 196608, 0, 3, 196623, 0, 3, 262144, 0, 3, 262159, 0, 3, 327680, 0, 3, 327688, 0, 3, 327695, 0, 3, 393216, 0, 3, 393222, 0, 3, 393231, 0, 3, 458752, 0, 3, 458767, 0, 3, 524288, 0, 3, 524289, 0, 3, 524290, 0, 3, 524291, 0, 3, 524292, 0, 3, 524293, 0, 3, 524294, 0, 3, 524295, 0, 3, 524296, 0, 3, 524297, 0, 3, 524298, 0, 3, 524299, 0, 3, 524300, 0, 3, 524301, 0, 3, 524302, 0, 3, 524303, 0, 3 )
-

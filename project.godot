@@ -19,6 +19,11 @@ config/name="Monkey Grandma Gloves 2"
 run/main_scene="res://Node2D.tscn"
 config/icon="res://Assets/icon.png"
 
+[debug]
+
+settings/fps/force_fps=144
+settings/stdout/print_fps=true
+
 [input]
 
 ui_left={
