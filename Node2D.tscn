@@ -285,7 +285,8 @@ __meta__ = {
 }
 speed = 400
 speedSprint = 800
-gravity = 100
+gravity = 300
+jump = -10000
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 position = Vector2( 525, 290 )
