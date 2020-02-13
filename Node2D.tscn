@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=2]
@@ -14,6 +14,9 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.0698, 58.2507 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 30.7923, 29.3016 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -280,19 +283,22 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Node2D" type="Node2D"]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( -632.186, 962.074 )
+position = Vector2( -886.832, 1035.96 )
 script = ExtResource( 1 )
-speed = 400
-speedSprint = 800
-gravity = 300
-jump = 10000
+__meta__ = {
+"_edit_group_": true
+}
+speed = 500
+speedSprint = 1000
+gravity = 350
+jump = 15000
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 position = Vector2( 986.739, 120.663 )
 scale = Vector2( 3.88084, 4.15478 )
 frames = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="defaultHitbox" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 986.839, 120.693 )
 shape = SubResource( 2 )
 
@@ -301,11 +307,17 @@ offset = Vector2( 960, 200 )
 rotating = true
 current = true
 limit_left = -960
-limit_top = -75
+limit_top = -200
 limit_right = 1850
 limit_bottom = 1075
 limit_smoothed = true
 smoothing_speed = 1.0
+
+[node name="crouchHitbox" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 986.82, 149.884 )
+shape = SubResource( 31 )
+disabled = true
+one_way_collision_margin = 0.0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 30 )
