@@ -12,8 +12,10 @@ func get_input():
 	velocity = Vector2()
 	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
+		get_node( "AnimatedSprite" ).set_flip_h( true )
 	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
+		get_node( "AnimatedSprite" ).set_flip_h( false )
 	if Input.is_action_pressed('sprint'):
 		velocity = velocity.normalized() * speedSprint
 	else:
