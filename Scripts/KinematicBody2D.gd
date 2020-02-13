@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export (int) var speed = 200
+export (int) var speedSprint = 400
 export (int) var gravity = 40
 export (int) var jump = -6400
 
@@ -14,7 +15,11 @@ func get_input():
 	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
 	
-	velocity = velocity.normalized() * speed
+	if Input.is_action_pressed('sprint'):
+		velocity = velocity.normalized() * speedSprint
+	else:
+		velocity = velocity.normalized() * speed
+		
 
 func _physics_process(_delta):
 	get_input()
