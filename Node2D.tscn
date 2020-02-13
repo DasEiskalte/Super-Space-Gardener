@@ -30,6 +30,3 @@ frames = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 525, 291 )
 shape = SubResource( 2 )
-
-[node name="TileMap" type="TileMap" parent="."]
-format = 1
