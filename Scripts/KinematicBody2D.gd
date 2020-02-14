@@ -40,8 +40,10 @@ func crouch(state):
 	if state:
 		$defaultHitbox.disabled = true
 		$crouchHitbox.disabled = false
+		$AnimatedSprite.animation = "crouch"
 		print("Crouch")
 	else:
 		$defaultHitbox.disabled = false
 		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "default"
 		print("uncrouch")
