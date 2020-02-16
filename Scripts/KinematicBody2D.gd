@@ -20,14 +20,18 @@ func get_input():
 		crouch(0)
 	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
+		$AnimatedSprite.animation = "walk"
 		get_node( "AnimatedSprite" ).set_flip_h( true )
 	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
+		$AnimatedSprite.animation = "walk"
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	if Input.is_action_pressed('sprint'):
 		velocity = velocity.normalized() * speedSprint
 	else:
 		velocity = velocity.normalized() * speed
+		if !Input.is_action_pressed("ui_left") and !Input.is_action_pressed(" ui_right"):
+			$AnimatedSprite.animation = "default"
 		
 
 func _physics_process(_delta):
