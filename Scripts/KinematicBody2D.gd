@@ -36,9 +36,6 @@ func _physics_process(_delta):
 	if  is_on_floor() and Input.is_action_just_pressed("jump"):
 		counter = 100
 		
-		
-	
-	
 	if !is_on_floor():
 		velocity.y += gravity
 		
