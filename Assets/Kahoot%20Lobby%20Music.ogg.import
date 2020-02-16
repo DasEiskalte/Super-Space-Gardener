@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Kahoot%20Lobby%20Music.ogg-4b3a59502b981c0ec5fd2955f11de0bd.oggstr"
+
+[deps]
+
+source_file="res://Assets/Kahoot%20Lobby%20Music.ogg"
+dest_files=[ "res://.import/Kahoot%20Lobby%20Music.ogg-4b3a59502b981c0ec5fd2955f11de0bd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
