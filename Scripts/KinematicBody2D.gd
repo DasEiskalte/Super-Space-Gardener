@@ -14,6 +14,7 @@ func get_input():
 
 	velocity = Vector2()
 
+
 	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
 
@@ -23,13 +24,16 @@ func get_input():
 		velocity.x -= 1
 
 
+
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	if Input.is_action_pressed('sprint'):
 		velocity = velocity.normalized() * speedSprint
 	else:
 		velocity = velocity.normalized() * speed
+
 		if !Input.is_action_pressed("ui_left") and !Input.is_action_pressed(" ui_right"):
 			$AnimatedSprite.animation = "default"
+
 
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 		$AnimatedSprite.animation = "walk"
@@ -38,10 +42,12 @@ func get_input():
 		$crouchHitbox.disabled = false
 		$AnimatedSprite.animation = "crouch"
 
+
 	else:
 		$defaultHitbox.disabled = false
 		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "default"
+
 
 
 
@@ -66,5 +72,7 @@ func _physics_process(_delta):
 
 	if is_on_ceiling():
 		counter = 20
+
+
 
 	velocity = move_and_slide(velocity, up)
