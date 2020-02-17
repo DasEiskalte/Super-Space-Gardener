@@ -13,25 +13,33 @@ var up = Vector2(0, -1)
 func get_input():
 	
 	velocity = Vector2()
-	if Input.is_action_just_pressed("crouch"):
-		crouch(1)
-		print("Crouch")
-	if Input.is_action_just_released("crouch"):
-		crouch(0)
+	
 	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
-		$AnimatedSprite.animation = "walk"
+		
 		get_node( "AnimatedSprite" ).set_flip_h( true )
 	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
-		$AnimatedSprite.animation = "walk"
+		
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	if Input.is_action_pressed('sprint'):
 		velocity = velocity.normalized() * speedSprint
 	else:
 		velocity = velocity.normalized() * speed
-		if !Input.is_action_pressed("ui_left") and !Input.is_action_pressed(" ui_right"):
-			$AnimatedSprite.animation = "default"
+		
+	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		$AnimatedSprite.animation = "walk"
+	elif Input.is_action_pressed("crouch"):
+		$defaultHitbox.disabled = true
+		$crouchHitbox.disabled = false
+		$AnimatedSprite.animation = "crouch"
+		
+	else:
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true 
+		$AnimatedSprite.animation = "default"
+		
+		
 		
 
 func _physics_process(_delta):
@@ -57,16 +65,5 @@ func _physics_process(_delta):
 		
 	velocity = move_and_slide(velocity, up)
 	
-func crouch(state):
-	if state:
-		$defaultHitbox.disabled = true
-		$crouchHitbox.disabled = false
-		$AnimatedSprite.animation = "crouch"
-		print("Crouch")
-	else:
-		$defaultHitbox.disabled = false
-		$crouchHitbox.disabled = true
-		$AnimatedSprite.animation = "default"
-		print("uncrouch")
 
 
