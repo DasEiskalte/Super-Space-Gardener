@@ -33,6 +33,9 @@ func get_input():
 
 		if !Input.is_action_pressed("ui_left") and !Input.is_action_pressed(" ui_right"):
 			$AnimatedSprite.animation = "default"
+			
+	if  is_on_floor() and Input.is_action_just_pressed("jump"):
+		counter = 100
 
 
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -55,8 +58,7 @@ func get_input():
 func _physics_process(_delta):
 	get_input()
 
-	if  is_on_floor() and Input.is_action_just_pressed("jump"):
-		counter = 100
+	
 
 	if !is_on_floor():
 		velocity.y += gravity
