@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 export (int) var speed = 200
 export (int) var speedSprint = 400
-export (int) var gravity = 400
-export (int) var jump = 1000
+export (int) var gravity = 600
+export (int) var jump = 1100
 
 export (int) var counter = 0
 
@@ -68,7 +68,7 @@ func _physics_process(_delta):
 
 	if counter == 20:
 		counter = 0
-		jump = 1000
+		jump = 1100
 
 	if is_on_ceiling():
 		counter = 20
