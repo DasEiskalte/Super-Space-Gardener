@@ -310,6 +310,7 @@ position = Vector2( 991.127, 124.594 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
 animation = "walk"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_group_": true
