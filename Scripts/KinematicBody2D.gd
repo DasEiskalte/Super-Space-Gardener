@@ -1,63 +1,67 @@
-extends KinematicBody2D
+extends Actor
 
-export (int) var speed = 200
-export (int) var speedSprint = 400
-export (int) var gravity = 600
+
+export (int) var speedMultiplier = 2
 export (int) var jump = 1100
-export (int) var counter = 0
-
-var velocity = Vector2()
-var up = Vector2(0, -1)
+var isCrouched = false
 
 
-func get_input():
-
-	velocity = Vector2()
-
-	if Input.is_action_pressed('ui_right'):
-		velocity.x += 1
-
-		get_node( "AnimatedSprite" ).set_flip_h( true )
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= 1
-
-		get_node( "AnimatedSprite" ).set_flip_h( false )
-	if Input.is_action_pressed('sprint'):
-		velocity = velocity.normalized() * speedSprint
-	else:
-		velocity = velocity.normalized() * speed
-
-	if  is_on_floor() and Input.is_action_just_pressed("jump"):
-		counter = 100
-
-	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+func _physics_process(delta: float) -> void:
+	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
+	var direction: = get_direction()
+	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+	
+	if Input.is_action_pressed("sprint"):
+		_velocity = Vector2(_velocity.x * speedMultiplier, _velocity.y)
+	if Input.is_action_pressed("ui_left") and !isCrouched:
 		$AnimatedSprite.animation = "walk"
+		get_node( "AnimatedSprite" ).set_flip_h( false )
+	elif Input.is_action_pressed("ui_right") and !isCrouched:
+		$AnimatedSprite.animation = "walk"
+		get_node( "AnimatedSprite" ).set_flip_h( true )
 	elif Input.is_action_pressed("crouch"):
-		$defaultHitbox.disabled = true
-		$crouchHitbox.disabled = false
-		$AnimatedSprite.animation = "crouch"
+		crouch()
+	elif Input.is_action_just_released("crouch"):
+		uncrouch()
 	else:
-		$defaultHitbox.disabled = false
-		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "default"
+		
+	
+	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
+	_velocity = move_and_slide_with_snap(
+		_velocity, snap, FLOOR_NORMAL, true
+	)
 
 
-func _physics_process(_delta):
-	get_input()
+func get_direction() -> Vector2:
+	return Vector2(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		-Input.get_action_strength("jump") if is_on_floor() and Input.is_action_just_pressed("jump") else 0.0
+	)
 
-	if !is_on_floor():
-		velocity.y += gravity
 
-	if counter > 20:
-		velocity.y -= jump
-		counter -= 1
-		jump -= 15
-
-	if counter == 20:
-		counter = 0
-		jump = 1100
-
-	if is_on_ceiling():
-		counter = 20
-
-	velocity = move_and_slide(velocity, up)
+func calculate_move_velocity(
+		linear_velocity: Vector2,
+		direction: Vector2,
+		speed: Vector2,
+		is_jump_interrupted: bool
+	) -> Vector2:
+	var velocity: = linear_velocity
+	velocity.x = speed.x * direction.x
+	if direction.y != 0.0:
+		velocity.y = speed.y * direction.y
+	if is_jump_interrupted:
+		velocity.y = 0.0
+	return velocity
+	
+func crouch():
+	$defaultHitbox.disabled = true
+	$crouchHitbox.disabled = false
+	$AnimatedSprite.animation = "crouch"
+	isCrouched = true
+	
+func uncrouch():
+	$defaultHitbox.disabled = false
+	$crouchHitbox.disabled = true
+	$AnimatedSprite.animation = "default"
+	isCrouched = false
