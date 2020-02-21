@@ -13,18 +13,20 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("sprint"):
 		_velocity = Vector2(_velocity.x * speedMultiplier, _velocity.y)
-	if Input.is_action_pressed("ui_left") and !isCrouched:
-		walk()
-		get_node( "AnimatedSprite" ).set_flip_h( false )
-	elif Input.is_action_pressed("ui_right") and !isCrouched:
-		walk()
-		get_node( "AnimatedSprite" ).set_flip_h( true )
-	elif Input.is_action_pressed("crouch"):
-		crouch()
-	elif Input.is_action_just_released("crouch"):
+	if Input.is_action_just_released("crouch"):
 		default()
+	if Input.is_action_pressed("ui_left"):
+		if !isCrouched:
+			walk()
+		get_node( "AnimatedSprite" ).set_flip_h( false )
+	elif Input.is_action_pressed("ui_right"):
+		if !isCrouched:
+			walk()
+		get_node( "AnimatedSprite" ).set_flip_h( true )
 	else:
 		default()
+	if Input.is_action_pressed("crouch"):
+		crouch()
 		
 	
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
