@@ -14,17 +14,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("sprint"):
 		_velocity = Vector2(_velocity.x * speedMultiplier, _velocity.y)
 	if Input.is_action_pressed("ui_left") and !isCrouched:
-		$AnimatedSprite.animation = "walk"
+		walk()
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	elif Input.is_action_pressed("ui_right") and !isCrouched:
-		$AnimatedSprite.animation = "walk"
+		walk()
 		get_node( "AnimatedSprite" ).set_flip_h( true )
 	elif Input.is_action_pressed("crouch"):
 		crouch()
 	elif Input.is_action_just_released("crouch"):
-		uncrouch()
+		default()
 	else:
-		$AnimatedSprite.animation = "default"
+		default()
 		
 	
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
@@ -57,11 +57,21 @@ func calculate_move_velocity(
 func crouch():
 	$defaultHitbox.disabled = true
 	$crouchHitbox.disabled = false
+	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "crouch"
 	isCrouched = true
 	
-func uncrouch():
+func default():
 	$defaultHitbox.disabled = false
 	$crouchHitbox.disabled = true
+	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "default"
 	isCrouched = false
+
+func walk():
+	$defaultHitbox.disabled = true
+	$crouchHitbox.disabled = true
+	$walkHitbox.disabled = false
+	$AnimatedSprite.animation = "walk"
+	isCrouched = false
+	
