@@ -27,6 +27,8 @@ func _physics_process(delta: float) -> void:
 		default()
 	if Input.is_action_pressed("crouch"):
 		crouch()
+	if Input.is_action_just_pressed("reset"):
+		reset()
 		
 	
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
@@ -76,4 +78,8 @@ func walk():
 	$walkHitbox.disabled = false
 	$AnimatedSprite.animation = "walk"
 	isCrouched = false
+	
+func reset():
+	get_tree().reload_current_scene()
+	OS.delay.msec(1000)
 	
