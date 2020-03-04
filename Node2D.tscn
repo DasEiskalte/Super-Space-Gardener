@@ -17,14 +17,14 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "crouch",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "crouch",
 "speed": 5.0
 } ]
 
@@ -130,7 +130,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -311,6 +310,7 @@ position = Vector2( 991.391, 115.898 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
 animation = "walk"
+frame = 2
 playing = true
 __meta__ = {
 "_edit_group_": true
@@ -346,12 +346,6 @@ __meta__ = {
 position = Vector2( 992.643, 121.59 )
 shape = SubResource( 4 )
 
-[node name="crouchCollision" type="RayCast2D" parent="KinematicBody2D"]
-position = Vector2( 992.437, 178.241 )
-rotation = 3.14159
-enabled = true
-cast_to = Vector2( 0, 100 )
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 32 )
 format = 1
@@ -364,3 +358,4 @@ pitch_scale = 2.5
 autoplay = true
 max_distance = 1e+09
 area_mask = 1048575
+
