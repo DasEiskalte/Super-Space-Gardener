@@ -6,6 +6,7 @@ export (float) var crouchMultiplier = 0.75
 var Multiplier = 1
 export (int) var jump = 1100
 var isCrouched = false
+var canUncrouch = false
 
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
