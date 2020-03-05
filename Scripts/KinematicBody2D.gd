@@ -6,7 +6,7 @@ export (float) var crouchMultiplier = 0.75
 var Multiplier = 1
 export (int) var jump = 1100
 var isCrouched = false
-var canUncrouch
+var canUncrouch = false
 
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
@@ -42,7 +42,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		default()
 	if Input.is_action_pressed("crouch"):
-		crouch()
+		if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+			crouchWalk()
+		else:
+			crouch()
 		Multiplier = crouchMultiplier
 	if Input.is_action_just_pressed("reset"):
 		reset()
@@ -96,6 +99,13 @@ func walk():
 	$walkHitbox.disabled = false
 	$AnimatedSprite.animation = "walk"
 	isCrouched = false
+	
+func crouchWalk():
+	$defaultHitbox.disabled = true
+	$crouchHitbox.disabled = false
+	$walkHitbox.disabled = true
+	$AnimatedSprite.animation = "crouchWalk"
+	isCrouched = true
 	
 func reset():
 	get_tree().reload_current_scene()
