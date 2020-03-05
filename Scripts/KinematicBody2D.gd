@@ -6,16 +6,24 @@ export (float) var crouchMultiplier = 0.75
 var Multiplier = 1
 export (int) var jump = 1100
 var isCrouched = false
+var canUncrouch
 
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
 onready var walkHitbox = $walkHitbox
 
 func _physics_process(delta: float) -> void:
+	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	
+	if isCrouched:
+		var result = space_state.intersect_ray(get_position(), Vector2(get_position().x, get_position().y + 50))
+		if result.empty():
+			canUncrouch = true
+		else:
+			canUncrouch = false
 	if Input.is_action_pressed("sprint"):
 		Multiplier = speedMultiplier
 	if Input.is_action_just_released("sprint"):
