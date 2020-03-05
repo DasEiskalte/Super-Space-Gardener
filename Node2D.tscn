@@ -1,14 +1,18 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Walk1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Walk2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Walk3.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Walk4.png" type="Texture" id=6]
-[ext_resource path="res://Assets/SSGduck.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Kahoot%20Lobby%20Music.ogg" type="AudioStream" id=8]
-[ext_resource path="res://Assets/tileset.png" type="Texture" id=9]
+[ext_resource path="res://Assets/SSGduck.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Walk1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Walk2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Walk3.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Walk4.png" type="Texture" id=7]
+[ext_resource path="res://Assets/DuckWalk1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/DuckWalk2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/DuckWalk3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/DuckWalk4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Kahoot%20Lobby%20Music.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/tileset.png" type="Texture" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -17,14 +21,19 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "crouch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "crouch",
+"name": "crouchWalk",
 "speed": 5.0
 } ]
 
@@ -123,7 +132,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=33]
 0/name = "tileset.png 0"
-0/texture = ExtResource( 9 )
+0/texture = ExtResource( 13 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 512, 768 )
@@ -321,7 +330,7 @@ speed = Vector2( 400, 1100 )
 position = Vector2( 991.391, 115.898 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
-animation = "walk"
+animation = "crouchWalk"
 frame = 1
 playing = true
 __meta__ = {
@@ -367,7 +376,7 @@ __meta__ = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
 position = Vector2( 947.198, -2439.47 )
-stream = ExtResource( 8 )
+stream = ExtResource( 12 )
 pitch_scale = 2.5
 autoplay = true
 max_distance = 1e+09
