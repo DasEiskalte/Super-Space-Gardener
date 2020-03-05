@@ -331,7 +331,7 @@ position = Vector2( 991.391, 115.898 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
 animation = "crouchWalk"
-frame = 3
+frame = 1
 playing = true
 __meta__ = {
 "_edit_group_": true
