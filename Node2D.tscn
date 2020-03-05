@@ -27,14 +27,14 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "crouchWalk",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "crouch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "crouchWalk",
 "speed": 5.0
 } ]
 
@@ -318,10 +318,10 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=35]
+[sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 35.8903, 31.9354 )
 
-[sub_resource type="SpriteFrames" id=34]
+[sub_resource type="SpriteFrames" id=35]
 animations = [ {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
@@ -407,8 +407,8 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
 position = Vector2( 288.882, 1188.34 )
-shape = SubResource( 35 )
+shape = SubResource( 34 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Rock"]
 position = Vector2( 288.882, 1187.64 )
-frames = SubResource( 34 )
+frames = SubResource( 35 )
