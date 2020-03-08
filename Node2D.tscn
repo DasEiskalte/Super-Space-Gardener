@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://Assets/Rock1.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Rock5.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Rock4.png" type="Texture" id=19]
-[ext_resource path="res://Rock.gd" type="Script" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -28,9 +27,9 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "walk",
+"name": "crouch",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
@@ -38,9 +37,9 @@ animations = [ {
 "name": "crouchWalk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "crouch",
+"name": "walk",
 "speed": 5.0
 } ]
 
@@ -418,7 +417,6 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Rock" type="StaticBody2D" parent="."]
 position = Vector2( 1.32684, 14.5953 )
-script = ExtResource( 20 )
 __meta__ = {
 "_edit_group_": true
 }
