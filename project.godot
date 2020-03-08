@@ -66,6 +66,10 @@ reset={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="KinematicBody2D"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

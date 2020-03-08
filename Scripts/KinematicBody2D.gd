@@ -7,7 +7,6 @@ var Multiplier = 1
 export (int) var jump = 1100
 var isCrouched = false
 var canUncrouch = false
-
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
 onready var walkHitbox = $walkHitbox
@@ -18,25 +17,29 @@ func _physics_process(delta: float) -> void:
 	var direction: = get_direction()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	
+	print($RayCast2D.is_colliding())
 	if isCrouched:
-		var result = space_state.intersect_ray(get_position(), Vector2(get_position().x, get_position().y + 50))
-		if result.empty():
-			canUncrouch = true
-		else:
+		if $RayCast2D.is_colliding():
 			canUncrouch = false
+		else:
+			canUncrouch = true
 	if Input.is_action_pressed("sprint"):
 		Multiplier = speedMultiplier
 	if Input.is_action_just_released("sprint"):
 		Multiplier = 1
-	if Input.is_action_just_released("crouch"):
-		default()
-		Multiplier = 1
+	if canUncrouch:
+		if Input.is_action_just_released("crouch"):
+			default()
+			Multiplier = 1
+	else:
+		crouch()
+		Multiplier =crouchMultiplier
 	if Input.is_action_pressed("ui_left"):
-		if !isCrouched:
+		if !isCrouched and canUncrouch:
 			walk()
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	elif Input.is_action_pressed("ui_right"):
-		if !isCrouched:
+		if !isCrouched and canUncrouch:
 			walk()
 		get_node( "AnimatedSprite" ).set_flip_h( true )
 	else:
@@ -87,11 +90,12 @@ func crouch():
 	isCrouched = true
 	
 func default():
-	$defaultHitbox.disabled = false
-	$crouchHitbox.disabled = true
-	$walkHitbox.disabled = true
-	$AnimatedSprite.animation = "default"
-	isCrouched = false
+	if canUncrouch:
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$walkHitbox.disabled = true
+		$AnimatedSprite.animation = "default"
+		isCrouched = false
 
 func walk():
 	$defaultHitbox.disabled = true
