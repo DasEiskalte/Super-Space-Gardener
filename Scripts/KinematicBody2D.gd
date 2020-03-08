@@ -19,13 +19,13 @@ func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-	print("isCrouched")
-	print(isCrouched)
-	print("canUncrouch")
-	print(canUncrouch)
-	print("isWalking")
-	print(isWalking)
-	print(Multiplier)
+	#print("isCrouched")
+	#print(isCrouched)
+	#print("canUncrouch")
+	#print(canUncrouch)
+	#print("isWalking")
+	#print(isWalking)
+	#print(Multiplier)
 	if $RayCast2D.is_colliding():
 			canUncrouch = false
 	else:
@@ -104,7 +104,7 @@ func crouch():
 	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "crouch"
 	isCrouched = true
-	print("crouch")
+	#print("crouch")
 	isCrouchWalking = false
 	
 func default():
@@ -112,7 +112,7 @@ func default():
 	$crouchHitbox.disabled = true
 	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "default"
-	print("default")
+	#print("default")
 	isCrouchWalking = false
 
 
@@ -121,7 +121,7 @@ func walk():
 	$crouchHitbox.disabled = true
 	$walkHitbox.disabled = false
 	$AnimatedSprite.animation = "walk"
-	print("walk")
+	#print("walk")
 	isWalking = true
 	isCrouchWalking = false
 
@@ -132,15 +132,14 @@ func crouchWalk():
 	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "crouchWalk"
 	isCrouched = true
-	print("crouchWalk")
+	#print("crouchWalk")
 	isCrouchWalking = true
 	
 func uncrouch():
 	isCrouched = false
-	print("uncrouch")
+	#print("uncrouch")
 	isCrouchWalking = false
 
 func reset():
 	get_tree().reload_current_scene()
-	OS.delay.msec(1000)
 	
