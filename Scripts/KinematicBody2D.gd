@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	#print("isWalking")
 	#print(isWalking)
 	#print(Multiplier)
+	#print(isCrouchWalking)
 	if $RayCast2D.is_colliding():
 			canUncrouch = false
 	else:
