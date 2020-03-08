@@ -101,7 +101,6 @@ func calculate_move_velocity(
 func crouch():
 	$defaultHitbox.disabled = true
 	$crouchHitbox.disabled = false
-	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "crouch"
 	isCrouched = true
 	#print("crouch")
@@ -110,16 +109,14 @@ func crouch():
 func default():
 	$defaultHitbox.disabled = false
 	$crouchHitbox.disabled = true
-	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "default"
 	#print("default")
 	isCrouchWalking = false
 
 
 func walk():
-	$defaultHitbox.disabled = true
+	$defaultHitbox.disabled = false
 	$crouchHitbox.disabled = true
-	$walkHitbox.disabled = false
 	$AnimatedSprite.animation = "walk"
 	#print("walk")
 	isWalking = true
@@ -129,7 +126,6 @@ func walk():
 func crouchWalk():
 	$defaultHitbox.disabled = true
 	$crouchHitbox.disabled = false
-	$walkHitbox.disabled = true
 	$AnimatedSprite.animation = "crouchWalk"
 	isCrouched = true
 	#print("crouchWalk")
