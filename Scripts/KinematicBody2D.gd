@@ -10,57 +10,46 @@ var canUncrouch = false
 var isWalking = false
 var isCrouchWalking = false
 var isSprinting = false
+var state = "idle"
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
 onready var walkHitbox = $walkHitbox
 
 func _physics_process(delta: float) -> void:
+	print(state)
 	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-	#print("isCrouched")
-	#print(isCrouched)
-	#print("canUncrouch")
-	#print(canUncrouch)
-	#print("isWalking")
-	#print(isWalking)
-	#print(Multiplier)
-	#print(isCrouchWalking)
-	if $RayCast2D.is_colliding():
+	if $RayCast2D.is_colliding() and (state == "crouch" or state == "crouchWalk"):
 			canUncrouch = false
 	else:
 			canUncrouch = true
-	if Input.is_action_pressed("sprint") and !isCrouched:
-		isSprinting = true
-	if Input.is_action_just_released("sprint"):
-		isSprinting = false
+	if Input.is_action_pressed("sprint") and state == "walk":
+		state = "sprint"
+	if !Input.is_action_pressed("sprint") and state == "sprint":
+		state = "walk"
 	if Input.is_action_pressed("ui_left"):
-		if !isCrouched:
-			walk()
-		else:
-			crouchWalk()
-			isWalking = false
+		if state != "crouch" and state != "crouchWalk" and state != "sprint":
+			state = "walk"
+		elif state != "sprint":
+			state = "crouchWalk"
 		get_node( "AnimatedSprite" ).set_flip_h( false )
 	elif Input.is_action_pressed("ui_right"):
-		if !isCrouched:
-			walk()
-		else:
-			crouchWalk()
-			isWalking = false
+		if state != "crouch" and state != "crouchWalk" and state != "sprint":
+			state = "walk"
+		elif state != "sprint":
+			state = "crouchWalk"
 		get_node( "AnimatedSprite" ).set_flip_h( true )
-	elif !isCrouched:
-		isWalking = false
-		uncrouch()
-		default()
-	elif isCrouched:
-		isCrouchWalking = false
-	if Input.is_action_pressed("crouch") or (!canUncrouch and isCrouched):
-			if !isCrouchWalking:
-				crouch()
-	elif canUncrouch and !isWalking:
-		uncrouch()
-		default()
+	elif state != "crouch" and state != "crouchWalking" and state != "sprint" and canUncrouch:
+		state = "idle"
+	elif state == "crouchWalk":
+		state = "crouch"
+	if Input.is_action_pressed("crouch") or (!canUncrouch and state == "crouch"):
+		if state != "crouchWalk":
+			state = "crouch"
+	elif canUncrouch and state != "walk" and state != "sprint":
+		state = "idle"
 	if isSprinting:
 		Multiplier = speedMultiplier
 	elif isCrouched or isCrouchWalking:
@@ -69,6 +58,33 @@ func _physics_process(delta: float) -> void:
 		Multiplier = 1
 	if Input.is_action_just_pressed("reset"):
 		reset()
+	if state == "crouch":
+		$defaultHitbox.disabled = true
+		$crouchHitbox.disabled = false
+		$AnimatedSprite.animation = "crouch"
+		Multiplier = crouchMultiplier
+	elif state == "idle":
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "default"
+		Multiplier = 1
+	elif state == "walk":
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "walk"
+		Multiplier = 1
+	elif state == "crouchWalk":
+		$defaultHitbox.disabled = true
+		$crouchHitbox.disabled = false
+		$AnimatedSprite.animation = "crouchWalk"
+		Multiplier = crouchMultiplier
+	elif state == "sprint":
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "walk"
+		Multiplier = speedMultiplier
+	print(canUncrouch)
+		
 		
 	
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
@@ -98,44 +114,6 @@ func calculate_move_velocity(
 	if is_jump_interrupted:
 		velocity.y = 0.0
 	return velocity
-	
-func crouch():
-	$defaultHitbox.disabled = true
-	$crouchHitbox.disabled = false
-	$AnimatedSprite.animation = "crouch"
-	isCrouched = true
-	#print("crouch")
-	isCrouchWalking = false
-	
-func default():
-	$defaultHitbox.disabled = false
-	$crouchHitbox.disabled = true
-	$AnimatedSprite.animation = "default"
-	#print("default")
-	isCrouchWalking = false
-
-
-func walk():
-	$defaultHitbox.disabled = false
-	$crouchHitbox.disabled = true
-	$AnimatedSprite.animation = "walk"
-	#print("walk")
-	isWalking = true
-	isCrouchWalking = false
-
-	
-func crouchWalk():
-	$defaultHitbox.disabled = true
-	$crouchHitbox.disabled = false
-	$AnimatedSprite.animation = "crouchWalk"
-	isCrouched = true
-	#print("crouchWalk")
-	isCrouchWalking = true
-	
-func uncrouch():
-	isCrouched = false
-	#print("uncrouch")
-	isCrouchWalking = false
 
 func reset():
 	get_tree().reload_current_scene()

@@ -1,38 +1,38 @@
 [gd_scene load_steps=47 format=2]
 
-[ext_resource path="res://Assets/DuckWalk4.png" type="Texture" id=1]
-[ext_resource path="res://Assets/tileset.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Kahoot%20Lobby%20Music.ogg" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Walk3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Walk4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/DuckWalk1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Walk1.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
+[ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Walk1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Walk2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Walk3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Walk4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/DuckWalk1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/DuckWalk2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/DuckWalk3.png" type="Texture" id=9]
-[ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Walk2.png" type="Texture" id=11]
-[ext_resource path="res://Assets/SSGduck.png" type="Texture" id=12]
-[ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=14]
+[ext_resource path="res://Assets/DuckWalk4.png" type="Texture" id=10]
+[ext_resource path="res://Assets/SSGduck.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Kahoot%20Lobby%20Music.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/tileset.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 1 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "crouchWalk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "crouch",
 "speed": 5.0
@@ -130,7 +130,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=32]
 0/name = "tileset.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 13 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 512, 768 )
@@ -140,7 +140,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -319,7 +318,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( -62, 15 )
-script = ExtResource( 14 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -329,8 +328,6 @@ speed = Vector2( 400, 1100 )
 position = Vector2( 160.883, 1137.52 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
-animation = "crouchWalk"
-frame = 3
 playing = true
 flip_h = true
 __meta__ = {
@@ -345,13 +342,13 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2( 0, 1200 )
+offset = Vector2( 0, 1000 )
 rotating = true
 current = true
 limit_left = 0
 limit_top = -9999
 limit_right = 99999
-limit_bottom = 75
+limit_bottom = 1300
 smoothing_speed = 1.0
 __meta__ = {
 "_edit_group_": true
@@ -368,7 +365,7 @@ __meta__ = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( 947.198, -2439.47 )
-stream = ExtResource( 3 )
+stream = ExtResource( 12 )
 pitch_scale = 2.5
 autoplay = true
 max_distance = 1e+09
@@ -393,6 +390,7 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Rocks" type="Node2D" parent="."]
 
-[node name="Rock 1" parent="Rocks" instance=ExtResource( 13 )]
+[node name="Rock 1" parent="Rocks" instance=ExtResource( 14 )]
 position = Vector2( 807.5, 1189 )
+
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
