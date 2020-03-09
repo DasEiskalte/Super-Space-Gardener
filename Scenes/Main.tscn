@@ -11,7 +11,7 @@
 [ext_resource path="res://Assets/DuckWalk3.png" type="Texture" id=9]
 [ext_resource path="res://Assets/DuckWalk4.png" type="Texture" id=10]
 [ext_resource path="res://Assets/SSGduck.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Kahoot%20Lobby%20Music.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/soundtrack.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=14]
 
@@ -140,6 +140,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -366,7 +367,6 @@ __meta__ = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( 947.198, -2439.47 )
 stream = ExtResource( 12 )
-pitch_scale = 2.5
 autoplay = true
 max_distance = 1e+09
 area_mask = 1048575
@@ -392,5 +392,4 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Rock 1" parent="Rocks" instance=ExtResource( 14 )]
 position = Vector2( 807.5, 1189 )
-
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
