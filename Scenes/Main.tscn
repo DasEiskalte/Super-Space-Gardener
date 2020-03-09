@@ -320,16 +320,12 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( -62, 15 )
 script = ExtResource( 14 )
-__meta__ = {
-"_edit_group_": true
-}
 speed = Vector2( 400, 1100 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
-position = Vector2( 160.883, 1137.52 )
+position = Vector2( 160, 1138 )
 scale = Vector2( 3.53868, 4.01661 )
 frames = SubResource( 1 )
-animation = "crouchWalk"
 playing = true
 flip_h = true
 __meta__ = {
@@ -376,13 +372,35 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="RayCast2D" type="RayCast2D" parent="Player"]
+[node name="raycastCrouch" type="RayCast2D" parent="Player"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0.47451, 0.0392157, 0.0392157, 1 )
 position = Vector2( 158.624, 1198.34 )
 rotation = 3.14159
 enabled = true
 cast_to = Vector2( 0, 100 )
+
+[node name="WallRaycasts" type="Node2D" parent="Player"]
+
+[node name="LeftWallRaycasts" type="Node2D" parent="Player/WallRaycasts"]
+
+[node name="LeftWallRaycast" type="RayCast2D" parent="Player/WallRaycasts/LeftWallRaycasts"]
+position = Vector2( 160, 1120 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 31 )
+
+[node name="LeftWallRaycast2" type="RayCast2D" parent="Player/WallRaycasts/LeftWallRaycasts"]
+
+[node name="RightWallRaycasts" type="Node2D" parent="Player/WallRaycasts"]
+
+[node name="wallslideRight" type="RayCast2D" parent="Player/WallRaycasts/RightWallRaycasts"]
+position = Vector2( 160, 1120 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 31 )
+
+[node name="wallslideRight2" type="RayCast2D" parent="Player/WallRaycasts/RightWallRaycasts"]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 3.01468, 1.50732 )
