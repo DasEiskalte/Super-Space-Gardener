@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/SuperSpaceSoldierMitDerBlumeLinks.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Walk4.png" type="Texture" id=11]
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/soundtrack.ogg" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -26,14 +27,14 @@ animations = [ {
 "name": "crouch",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "crouchWalk",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "crouchWalk",
 "speed": 5.0
 } ]
 
@@ -139,6 +140,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -318,9 +320,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( -62, 15 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 speed = Vector2( 400, 1100 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
@@ -362,10 +361,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2( 947.198, -2439.47 )
+[node name="backgrundMusic" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( 160.883, 1137.52 )
+stream = ExtResource( 14 )
 autoplay = true
-max_distance = 1e+09
+max_distance = 2.14748e+09
+attenuation = 1e-05
 area_mask = 1048575
 __meta__ = {
 "_edit_group_": true
@@ -389,5 +390,4 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Rock 1" parent="Rocks" instance=ExtResource( 13 )]
 position = Vector2( 807.5, 1189 )
-
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
