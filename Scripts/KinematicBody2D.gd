@@ -119,3 +119,7 @@ func checkWall(raycast):
 		return true
 	else:
 		return false
+
+func updateWallDirection():
+	var isNearWallLeft = checkWall($leftCollision)
+	var isNearWallRight = checkWall($rightCollision)
