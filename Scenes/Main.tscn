@@ -323,7 +323,8 @@ script = ExtResource( 14 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = Vector2( 400, 1100 )
+speed = Vector2( 600, 1100 )
+speedMultiplier = 1.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 position = Vector2( 160, 1138 )

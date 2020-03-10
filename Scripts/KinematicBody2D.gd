@@ -21,7 +21,11 @@ func _physics_process(delta: float) -> void:
 	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
+	if state == "walSlide":
+		direction.x *= -1
+	#direction.y *= 2
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+	#_velocity.y *= 0.9
 	if $raycastCrouch.is_colliding() and (state == "crouch" or state == "crouchWalk"):
 			canUncrouch = false
 	else:
@@ -51,12 +55,10 @@ func _physics_process(delta: float) -> void:
 			state = "crouch"
 	elif canUncrouch and state != "walk" and state != "sprint":
 		state = "idle"
-	if isSprinting:
-		Multiplier = speedMultiplier
-	elif isCrouched or isCrouchWalking:
-		Multiplier = crouchMultiplier
-	else:
-		Multiplier = 1
+	if wallDirection != 0 and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
+		state = "wallSlide"
+	elif state == "wallSlide" && wallDirection == 0:
+		state = "idle"
 	if Input.is_action_just_pressed("reset"):
 		reset()
 	if state == "crouch":
@@ -86,14 +88,14 @@ func _physics_process(delta: float) -> void:
 		Multiplier = speedMultiplier
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 	_velocity = move_and_slide_with_snap(
-		_velocity, snap, FLOOR_NORMAL, true
+		_velocity , snap, FLOOR_NORMAL, true
 	)
+	updateWallDirection()
 func get_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		-Input.get_action_strength("jump") if is_on_floor() and Input.is_action_just_pressed("jump") else 0.0
+		-Input.get_action_strength("jump") if (is_on_floor() or state == "wallSlide") and Input.is_action_just_pressed("jump") else 0.0
 	)
-
 
 func calculate_move_velocity(
 		linear_velocity: Vector2,
@@ -104,6 +106,7 @@ func calculate_move_velocity(
 	speed.x *= Multiplier
 	var velocity: = linear_velocity
 	velocity.x = speed.x * direction.x
+	print(direction.y)
 	if direction.y != 0.0:
 		velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
@@ -114,7 +117,7 @@ func reset():
 	get_tree().reload_current_scene()
 
 func checkWall(raycast):
-	if raycast.is_colliding():
+	if raycast.is_colliding() and !is_on_floor():
 		return true
 	else:
 		return false
