@@ -83,8 +83,6 @@ func _physics_process(delta: float) -> void:
 		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "walk"
 		Multiplier = speedMultiplier
-		
-	print(_check_is_valid_wall())
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap, FLOOR_NORMAL, true
@@ -115,11 +113,3 @@ func calculate_move_velocity(
 
 func reset():
 	get_tree().reload_current_scene()
-	
-func _check_is_valid_wall():
-		if $wallslideLeft.is_colliding():
-			return true
-		elif $wallslideRight.is_colliding():
-			return true
-		else:
-			return false

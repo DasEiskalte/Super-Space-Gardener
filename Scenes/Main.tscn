@@ -391,6 +391,9 @@ enabled = true
 cast_to = Vector2( 0, 31 )
 
 [node name="LeftWallRaycast2" type="RayCast2D" parent="Player/WallRaycasts/LeftWallRaycasts"]
+position = Vector2( 160, 1170 )
+rotation = 1.5708
+cast_to = Vector2( 0, 31 )
 
 [node name="RightWallRaycasts" type="Node2D" parent="Player/WallRaycasts"]
 
@@ -401,6 +404,9 @@ enabled = true
 cast_to = Vector2( 0, 31 )
 
 [node name="wallslideRight2" type="RayCast2D" parent="Player/WallRaycasts/RightWallRaycasts"]
+position = Vector2( 160, 1170 )
+rotation = -1.5708
+cast_to = Vector2( 0, 31 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 3.01468, 1.50732 )
