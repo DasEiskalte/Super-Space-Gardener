@@ -11,6 +11,7 @@ var isWalking = false
 var isCrouchWalking = false
 var isSprinting = false
 var state = "idle"
+var wallDirection = 1
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
 onready var walkHitbox = $walkHitbox
@@ -87,8 +88,6 @@ func _physics_process(delta: float) -> void:
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap, FLOOR_NORMAL, true
 	)
-
-
 func get_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
@@ -123,3 +122,7 @@ func checkWall(raycast):
 func updateWallDirection():
 	var isNearWallLeft = checkWall($leftCollision)
 	var isNearWallRight = checkWall($rightCollision)
+	if isNearWallLeft && isNearWallRight:
+		wallDirection = 0
+	else:
+		wallDirection = -int(isNearWallLeft) + int(isNearWallRight)
