@@ -113,3 +113,9 @@ func calculate_move_velocity(
 
 func reset():
 	get_tree().reload_current_scene()
+
+func checkWall(raycast):
+	if raycast.is_colliding():
+		return true
+	else:
+		return false

@@ -320,6 +320,9 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( -62, 15 )
 script = ExtResource( 14 )
+__meta__ = {
+"_edit_group_": true
+}
 speed = Vector2( 400, 1100 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
@@ -380,32 +383,16 @@ rotation = 3.14159
 enabled = true
 cast_to = Vector2( 0, 100 )
 
-[node name="WallRaycasts" type="Node2D" parent="Player"]
-
-[node name="LeftWallRaycasts" type="Node2D" parent="Player/WallRaycasts"]
-
-[node name="LeftWallRaycast" type="RayCast2D" parent="Player/WallRaycasts/LeftWallRaycasts"]
-position = Vector2( 160, 1120 )
+[node name="leftCollision" type="RayCast2D" parent="Player"]
+position = Vector2( 160, 1140 )
 rotation = 1.5708
 enabled = true
 cast_to = Vector2( 0, 31 )
 
-[node name="LeftWallRaycast2" type="RayCast2D" parent="Player/WallRaycasts/LeftWallRaycasts"]
-position = Vector2( 160, 1170 )
-rotation = 1.5708
-cast_to = Vector2( 0, 31 )
-
-[node name="RightWallRaycasts" type="Node2D" parent="Player/WallRaycasts"]
-
-[node name="wallslideRight" type="RayCast2D" parent="Player/WallRaycasts/RightWallRaycasts"]
-position = Vector2( 160, 1120 )
+[node name="rightCollision" type="RayCast2D" parent="Player"]
+position = Vector2( 160, 1140 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 31 )
-
-[node name="wallslideRight2" type="RayCast2D" parent="Player/WallRaycasts/RightWallRaycasts"]
-position = Vector2( 160, 1170 )
-rotation = -1.5708
 cast_to = Vector2( 0, 31 )
 
 [node name="TileMap" type="TileMap" parent="."]
