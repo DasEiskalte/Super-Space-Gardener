@@ -139,6 +139,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -400,5 +401,4 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Rock 1" parent="Rocks" instance=ExtResource( 13 )]
 position = Vector2( 807.5, 1189 )
-
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
