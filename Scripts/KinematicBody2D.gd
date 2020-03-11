@@ -26,6 +26,8 @@ func _physics_process(delta: float) -> void:
 	#direction.y *= 2
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	#_velocity.y *= 0.9
+	if Input.get_action_strength("jump") != 0 and state != "wallSlide":
+		state = "jump"
 	if $raycastCrouch.is_colliding() and (state == "crouch" or state == "crouchWalk"):
 			canUncrouch = false
 	else:
@@ -46,14 +48,14 @@ func _physics_process(delta: float) -> void:
 		elif state != "sprint":
 			state = "crouchWalk"
 		get_node( "AnimatedSprite" ).set_flip_h( true )
-	elif state != "crouch" and state != "crouchWalking" and state != "sprint" and canUncrouch:
+	elif state != "crouch" and state != "crouchWalking" and state != "sprint" and canUncrouch and state != "jump":
 		state = "idle"
 	elif state == "crouchWalk":
 		state = "crouch"
 	if Input.is_action_pressed("crouch") or (!canUncrouch and state == "crouch"):
 		if state != "crouchWalk":
 			state = "crouch"
-	elif canUncrouch and state != "walk" and state != "sprint":
+	elif canUncrouch and state != "walk" and state != "sprint" and state != "jump":
 		state = "idle"
 	if wallDirection != 0 and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
 		state = "wallSlide"
@@ -61,6 +63,8 @@ func _physics_process(delta: float) -> void:
 		state = "idle"
 	if Input.is_action_just_pressed("reset"):
 		reset()
+	if state == "jump" and is_on_floor():
+		state = "default"
 	if state == "crouch":
 		$defaultHitbox.disabled = true
 		$crouchHitbox.disabled = false
@@ -86,6 +90,11 @@ func _physics_process(delta: float) -> void:
 		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "walk"
 		Multiplier = speedMultiplier
+	elif state == "jump":
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "jumpAnimation"
+		Multiplier = 1
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 	_velocity = move_and_slide_with_snap(
 		_velocity , snap, FLOOR_NORMAL, true
