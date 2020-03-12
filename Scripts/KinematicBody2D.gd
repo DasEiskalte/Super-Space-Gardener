@@ -12,18 +12,23 @@ var isCrouchWalking = false
 var isSprinting = false
 var state = "idle"
 var wallDirection = 1
+var isCollidingJumpPad = false
 onready var defaultHitbox = $defaultHitbox
 onready var crouchHitbox = $crouchHitbox
 onready var walkHitbox = $walkHitbox
 
 func _physics_process(delta: float) -> void:
-	print(state)
+	#print(state)
 	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	if state == "walSlide":
 		direction.x *= -1
 	#direction.y *= 2
+	if isCollidingJumpPad:
+		_velocity.y -= 3000
+		print(_velocity)
+		print(isCollidingJumpPad)
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	#_velocity.y *= 0.9
 	if Input.get_action_strength("jump") != 0 and state != "wallSlide":
@@ -100,6 +105,7 @@ func _physics_process(delta: float) -> void:
 		_velocity , snap, FLOOR_NORMAL, true
 	)
 	updateWallDirection()
+	isCollidingJumpPad = false
 func get_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
@@ -115,7 +121,7 @@ func calculate_move_velocity(
 	speed.x *= Multiplier
 	var velocity: = linear_velocity
 	velocity.x = speed.x * direction.x
-	print(direction.y)
+	#print(direction.y)
 	if direction.y != 0.0:
 		velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
@@ -138,3 +144,8 @@ func updateWallDirection():
 		wallDirection = 0
 	else:
 		wallDirection = -int(isNearWallLeft) + int(isNearWallRight)
+
+
+func _on_JumpPad_body_entered(body):
+	if body.name == "Player":
+		isCollidingJumpPad = true
