@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sneeze.ogg-dbe1d3ce00d74918a8ab2108611d4cab.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/sneeze.ogg"
+dest_files=[ "res://.import/sneeze.ogg-dbe1d3ce00d74918a8ab2108611d4cab.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Animations/Rock/Rock1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Animations/Rock/Rock4.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Animations/Rock/Rock6.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Animations/Rock/Rock2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Animations/Rock/Rock5.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animations/Rock/Rock3.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Opponents/Rock.gd" type="Script" id=7]
+
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.908, 19.0281 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.5412, 13.4031 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -3.68828, 0.614716 )
+frames = SubResource( 2 )
+frame = 2
+playing = true
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
