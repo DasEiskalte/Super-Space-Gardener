@@ -1,36 +1,27 @@
 extends Actor
 
-
+#Variable declearations
 export (float) var speedMultiplier = 1.25
 export (float) var crouchMultiplier = 0.75
-var Multiplier = 1
 export (int) var jump = 1100
-var isCrouched = false
+var Multiplier = 1
 var canUncrouch = false
-var isWalking = false
-var isCrouchWalking = false
-var isSprinting = false
 var state = "idle"
 var wallDirection = 1
 var isCollidingJumpPad = false
-onready var defaultHitbox = $defaultHitbox
-onready var crouchHitbox = $crouchHitbox
-onready var walkHitbox = $walkHitbox
 
 func _physics_process(delta: float) -> void:
-	#print(state)
+	#Calculates gravity, direction and velocity
 	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
-	if state == "walSlide":
-		direction.x *= -1
-	#direction.y *= 2
 	if isCollidingJumpPad:
 		_velocity.y -= 3000
 		print(_velocity)
 		print(isCollidingJumpPad)
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-	#_velocity.y *= 0.9
+	
+	#State detection
 	if Input.get_action_strength("jump") != 0 and state != "wallSlide":
 		state = "jump"
 	if $raycastCrouch.is_colliding() and (state == "crouch" or state == "crouchWalk"):
@@ -66,10 +57,10 @@ func _physics_process(delta: float) -> void:
 		state = "wallSlide"
 	elif state == "wallSlide" && wallDirection == 0:
 		state = "idle"
-	if Input.is_action_just_pressed("reset"):
-		reset()
 	if state == "jump" and is_on_floor():
 		state = "default"
+		
+	#State execution
 	if state == "crouch":
 		$defaultHitbox.disabled = true
 		$crouchHitbox.disabled = false
@@ -100,18 +91,25 @@ func _physics_process(delta: float) -> void:
 		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "jumpAnimation"
 		Multiplier = 1
+	
+	#Moves the Player
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 	_velocity = move_and_slide_with_snap(
 		_velocity , snap, FLOOR_NORMAL, true
 	)
+	
+	#Resets the jumpPad collision and updates the wallDirection
 	updateWallDirection()
 	isCollidingJumpPad = false
+
+#Calculates the direction as a Vector2
 func get_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		-Input.get_action_strength("jump") if (is_on_floor() or state == "wallSlide") and Input.is_action_just_pressed("jump") else 0.0
 	)
 
+#Calculates the move_velocity out of the linear_velocity, direction and speed
 func calculate_move_velocity(
 		linear_velocity: Vector2,
 		direction: Vector2,
@@ -121,15 +119,12 @@ func calculate_move_velocity(
 	speed.x *= Multiplier
 	var velocity: = linear_velocity
 	velocity.x = speed.x * direction.x
-	#print(direction.y)
 	if direction.y != 0.0:
 		velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
 		velocity.y = 0.0
 	return velocity
 
-func reset():
-	get_tree().reload_current_scene()
 
 func checkWall(raycast):
 	if raycast.is_colliding() and !is_on_floor():
@@ -145,12 +140,8 @@ func updateWallDirection():
 	else:
 		wallDirection = -int(isNearWallLeft) + int(isNearWallRight)
 
-
+#Waits for body entered signal from jumPad
 func _on_JumpPad_body_entered(body):
+	#Checks the name of the Colliding object
 	if body.name == "Player" and !is_on_floor():
 		isCollidingJumpPad = true
-
-
-func _on_Finish_body_entered(body):
-	if body.name == "Player":
-		get_tree().change_scene("res://Scenes/UI/Winscreen.tscn")
