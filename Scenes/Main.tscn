@@ -412,6 +412,6 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 position = Vector2( 807.5, 1189 )
 
 [node name="JumpPad" parent="." instance=ExtResource( 17 )]
-position = Vector2( 228, 1190 )
+position = Vector2( 228, 1205.4 )
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="JumpPad" to="Player" method="_on_JumpPad_body_entered"]

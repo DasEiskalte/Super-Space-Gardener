@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Jumppadnormal.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30.4488, 28.9047 )
+extents = Vector2( 31.8111, 16.3039 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -25,5 +25,5 @@ rotation = 3.14159
 cast_to = Vector2( 0, 35 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0.681122, 13.282 )
+position = Vector2( 0, 1.52588e-05 )
 frames = SubResource( 2 )

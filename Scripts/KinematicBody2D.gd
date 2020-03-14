@@ -147,5 +147,5 @@ func updateWallDirection():
 
 
 func _on_JumpPad_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and !is_on_floor():
 		isCollidingJumpPad = true
