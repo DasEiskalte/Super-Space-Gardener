@@ -149,3 +149,8 @@ func updateWallDirection():
 func _on_JumpPad_body_entered(body):
 	if body.name == "Player" and !is_on_floor():
 		isCollidingJumpPad = true
+
+
+func _on_Finish_body_entered(body):
+	if body.name == "Player":
+		get_tree().change_scene("res://Scenes/Winscreen.tscn")

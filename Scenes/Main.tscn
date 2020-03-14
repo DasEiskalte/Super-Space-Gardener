@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Walk3.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/JumpPad.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Finish.tscn" type="PackedScene" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -413,5 +414,9 @@ position = Vector2( 807.5, 1189 )
 
 [node name="JumpPad" parent="." instance=ExtResource( 17 )]
 position = Vector2( 228, 1205.4 )
+
+[node name="Finish" parent="." instance=ExtResource( 18 )]
+position = Vector2( 3575.19, 1150.4 )
 [connection signal="body_entered" from="Rocks/Rock 1" to="Rocks/Rock 1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="JumpPad" to="Player" method="_on_JumpPad_body_entered"]
+[connection signal="body_entered" from="Finish" to="Player" method="_on_Finish_body_entered"]
