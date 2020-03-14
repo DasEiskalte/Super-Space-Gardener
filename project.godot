@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Monkey Grandma Gloves 2"
+config/name="Super-Space-Gardener"
 run/main_scene="res://Scenes/Level/Main.tscn"
 config/icon="res://Assets/icon.png"
 
