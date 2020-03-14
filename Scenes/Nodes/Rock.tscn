@@ -8,9 +8,6 @@
 [ext_resource path="res://Assets/Animations/Rock/Rock3.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Opponents/Rock.gd" type="Script" id=7]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.908, 19.0281 )
 
@@ -22,13 +19,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Area2D" type="Area2D"]
+[node name="RockArea" type="Area2D"]
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="RockCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -3.5412, 13.4031 )
 shape = SubResource( 1 )
 

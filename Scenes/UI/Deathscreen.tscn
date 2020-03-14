@@ -8,26 +8,22 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Background" type="Sprite" parent="."]
 position = Vector2( 520, 300 )
 texture = ExtResource( 1 )
 
-[node name="Button" type="Node2D" parent="."]
-position = Vector2( 5, -25 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="ResetButton" type="Node" parent="."]
 
-[node name="ButtonTexture" type="Sprite" parent="Button"]
-position = Vector2( 530.359, 297.364 )
+[node name="ButtonTexture" type="Sprite" parent="ResetButton"]
+position = Vector2( 535.359, 272.364 )
 scale = Vector2( 2.45488, 3.5315 )
 texture = ExtResource( 3 )
 
-[node name="ButtonCollision" type="Button" parent="Button"]
-margin_left = 471.0
-margin_top = 269.43
-margin_right = 591.0
-margin_bottom = 329.43
+[node name="ButtonCollision" type="Button" parent="ResetButton"]
+margin_left = 476.0
+margin_top = 244.43
+margin_right = 596.0
+margin_bottom = 304.43
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -36,4 +32,4 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
-[connection signal="pressed" from="Button/ButtonCollision" to="." method="_on_ButtonCollision_pressed"]
+[connection signal="pressed" from="ResetButton/ButtonCollision" to="." method="_on_ButtonCollision_pressed"]
