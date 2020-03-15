@@ -1,20 +1,20 @@
 [gd_scene load_steps=51 format=2]
 
-[ext_resource path="res://Scripts/Player/KinematicBody2D.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Animations/Player/Walk3.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Animations/Player/Walk1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Animations/Player/Walk2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Animations/Player/Walk4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Animations/Player/DuckWalk1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Animations/Player/DuckWalk2.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Animations/Player/DuckWalk3.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Animations/Player/DuckWalk4.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Tilesets/tileset.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player/KinematicBody2D.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Animations/Player/Walk3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Animations/Player/Jump1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Animations/Player/Jump2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animations/Player/Jump3.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Animations/Player/Walk1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Animations/Player/Walk2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Animations/Player/Walk4.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Animations/Player/SSGduck.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Animations/Player/Jump1.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Animations/Player/Jump2.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Animations/Player/Jump3.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Sounds/soundtrack.ogg" type="AudioStream" id=14]
-[ext_resource path="res://Assets/Tilesets/tileset.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Animations/Player/DuckWalk1.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Animations/Player/DuckWalk2.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Animations/Player/DuckWalk3.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Animations/Player/DuckWalk4.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Sounds/soundtrack.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Scenes/Nodes/Rock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Nodes/JumpPad.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Nodes/Finish.tscn" type="PackedScene" id=18]
@@ -105,7 +105,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=29]
 0/name = "tileset.png 0"
-0/texture = ExtResource( 15 )
+0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 512, 768 )
@@ -115,7 +115,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -292,14 +291,19 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "jumpAnimation",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "crouchWalk",
+"name": "walk",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -307,14 +311,9 @@ animations = [ {
 "name": "crouch",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
-"loop": false,
-"name": "jumpAnimation",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "walk",
+"name": "crouchWalk",
 "speed": 5.0
 } ]
 
@@ -334,7 +333,7 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( -120.339, -689.78 )
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -364,7 +363,7 @@ current = true
 limit_left = 0
 limit_top = -9999
 limit_right = 99999
-limit_bottom = 1300
+limit_bottom = 999999
 smoothing_speed = 1.0
 __meta__ = {
 "_edit_group_": true
@@ -381,7 +380,7 @@ __meta__ = {
 
 [node name="backgrundMusic" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( 160.883, 1137.52 )
-stream = ExtResource( 14 )
+stream = ExtResource( 15 )
 autoplay = true
 max_distance = 2.14748e+09
 attenuation = 1e-05
@@ -487,6 +486,7 @@ position = Vector2( 1186.43, 1840.39 )
 
 [node name="Finish" parent="." instance=ExtResource( 18 )]
 position = Vector2( 2500, 970.344 )
+
 [connection signal="body_entered" from="Rocks/Rock0" to="Rocks/Rock0" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="JumpPads/JumpPad0" to="Player" method="_on_JumpPad_body_entered"]
 [connection signal="body_entered" from="JumpPads/JumpPad1" to="Player" method="_on_JumpArea_body_entered"]
