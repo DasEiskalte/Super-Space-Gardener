@@ -1,7 +1,7 @@
 extends Area2D
 
 #Waits for enter signal
-func _on_Area2D_body_entered(body):
+func _on_RockArea_body_entered(body):
 	print("Entered")
 	#Checks the name of the Colliding object
 	if body.name == "Player":
