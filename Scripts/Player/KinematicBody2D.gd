@@ -145,3 +145,9 @@ func _on_JumpPad_body_entered(body):
 	#Checks the name of the Colliding object
 	if body.name == "Player" and !is_on_floor():
 		isCollidingJumpPad = true
+
+
+func _on_JumpArea_body_entered(body):
+	#Checks the name of the Colliding object
+	if body.name == "Player" and !is_on_floor():
+		isCollidingJumpPad = true

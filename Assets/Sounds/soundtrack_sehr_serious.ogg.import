@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soundtrack_sehr_serious.ogg-23f7335018bea01e5dbcfc920e6bea5b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/soundtrack_sehr_serious.ogg"
+dest_files=[ "res://.import/soundtrack_sehr_serious.ogg-23f7335018bea01e5dbcfc920e6bea5b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

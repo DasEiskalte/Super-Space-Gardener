@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Screens/Winscreen.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UI/Winscreen.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/soundtrack_sehr_serious.ogg" type="AudioStream" id=3]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -23,4 +24,9 @@ text = "Play again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 5.0
+autoplay = true
 [connection signal="pressed" from="Button/ButtonCollision" to="." method="_on_Button_pressed"]
