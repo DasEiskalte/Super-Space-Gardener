@@ -307,11 +307,6 @@ animations = [ {
 "name": "jumpAnimation",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "crouch",
@@ -320,6 +315,11 @@ animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "crouchWalk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "walk",
 "speed": 5.0
 } ]
 
@@ -485,12 +485,7 @@ position = Vector2( 2151.78, 1183.54 )
 [node name="JumpPad0" parent="JumpPads" instance=ExtResource( 17 )]
 position = Vector2( 516.586, 815.979 )
 
-[node name="JumpPad1" parent="JumpPads" instance=ExtResource( 17 )]
-position = Vector2( 1186.43, 1840.39 )
-
 [node name="Finish" parent="." instance=ExtResource( 18 )]
 position = Vector2( 2500, 970.344 )
 [connection signal="body_entered" from="Rocks/Rock0" to="Rocks/Rock0" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="JumpPads/JumpPad0" to="Player" method="_on_JumpPad_body_entered"]
-[connection signal="body_entered" from="JumpPads/JumpPad1" to="Player" method="_on_JumpArea_body_entered"]
 [connection signal="body_entered" from="Finish" to="Player" method="_on_Finish_body_entered"]

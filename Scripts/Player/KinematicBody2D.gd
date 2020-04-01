@@ -8,17 +8,18 @@ var Multiplier = 1
 var canUncrouch = false
 var state = "idle"
 var wallDirection = 1
-var isCollidingJumpPad = false
 
 func _physics_process(delta: float) -> void:
 	#Calculates gravity, direction and velocity
 	var space_state = get_world_2d().direct_space_state
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
-	if isCollidingJumpPad:
+	#print(Global.isCollidingJumpPad)
+	if Global.isCollidingJumpPad:
 		_velocity.y -= 3000
 		print(_velocity)
-		print(isCollidingJumpPad)
+		print(Global.isCollidingJumpPad)
+		Global.isCollidingJumpPad = false
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	
 	#State detection
@@ -100,7 +101,6 @@ func _physics_process(delta: float) -> void:
 	
 	#Resets the jumpPad collision and updates the wallDirection
 	updateWallDirection()
-	isCollidingJumpPad = false
 
 #Calculates the direction as a Vector2
 func get_direction() -> Vector2:
@@ -139,15 +139,3 @@ func updateWallDirection():
 		wallDirection = 0
 	else:
 		wallDirection = -int(isNearWallLeft) + int(isNearWallRight)
-
-#Waits for body entered signal from jumPad
-func _on_JumpPad_body_entered(body):
-	#Checks the name of the Colliding object
-	if body.name == "Player" and !is_on_floor():
-		isCollidingJumpPad = true
-
-
-func _on_JumpArea_body_entered(body):
-	#Checks the name of the Colliding object
-	if body.name == "Player" and !is_on_floor():
-		isCollidingJumpPad = true
