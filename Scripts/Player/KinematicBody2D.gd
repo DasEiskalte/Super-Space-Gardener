@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	
 	#State detection
-	if Input.get_action_strength("jump") != 0 and state != "wallSlide":
+	if Input.get_action_strength("jump") != 0 and state != "wallSlide" and canUncrouch:
 		state = "jump"
 	if $raycastCrouch.is_colliding() and (state == "crouch" or state == "crouchWalk"):
 			canUncrouch = false
