@@ -12,15 +12,15 @@ var wallDirection = 1
 func _physics_process(delta: float) -> void:
 	#Calculates gravity, direction and velocity
 	var space_state = get_world_2d().direct_space_state
-	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	#print(Global.isCollidingJumpPad)
-	if Global.isCollidingJumpPad:
-		_velocity.y -= 3000
-		print(_velocity)
+	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
+	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+	if Global.isCollidingJumpPad:	
+		_velocity.y = -3600
+		print(get_position())
 		print(Global.isCollidingJumpPad)
 		Global.isCollidingJumpPad = false
-	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	
 	#State detection
 	if Input.get_action_strength("jump") != 0 and state != "wallSlide" and canUncrouch:
@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	_velocity = move_and_slide_with_snap(
 		_velocity , snap, FLOOR_NORMAL, true
 	)
-	
+	print(_velocity)
 	#Resets the jumpPad collision and updates the wallDirection
 	updateWallDirection()
 
