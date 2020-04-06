@@ -4,22 +4,26 @@ extends Actor
 export (float) var speedMultiplier = 1.25
 export (float) var crouchMultiplier = 0.75
 export (int) var jump = 1100
+export (int) var jumpPadHeigh = -2000
 var Multiplier = 1
 var canUncrouch = false
 var state = "idle"
 var wallDirection = 1
-var isCollidingJumpPad = false
 
 func _physics_process(delta: float) -> void:
 	#Calculates gravity, direction and velocity
 	var space_state = get_world_2d().direct_space_state
-	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
-	if isCollidingJumpPad:
-		_velocity.y -= 3000
-		print(_velocity)
-		print(isCollidingJumpPad)
+	#print(Global.isCollidingJumpPad)
+	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+	if Global.isCollidingJumpPad:	
+		_velocity.y = jumpPadHeigh
+		_velocity.x = 0
+		move_and_slide(_velocity)
+		print(get_position())
+		print(Global.isCollidingJumpPad)
+		Global.isCollidingJumpPad = false
 	
 	#State detection
 	if Input.get_action_strength("jump") != 0 and state != "wallSlide" and canUncrouch:
@@ -97,10 +101,9 @@ func _physics_process(delta: float) -> void:
 	_velocity = move_and_slide_with_snap(
 		_velocity , snap, FLOOR_NORMAL, true
 	)
-	
+	print(_velocity)
 	#Resets the jumpPad collision and updates the wallDirection
 	updateWallDirection()
-	isCollidingJumpPad = false
 
 #Calculates the direction as a Vector2
 func get_direction() -> Vector2:
@@ -139,15 +142,3 @@ func updateWallDirection():
 		wallDirection = 0
 	else:
 		wallDirection = -int(isNearWallLeft) + int(isNearWallRight)
-
-#Waits for body entered signal from jumPad
-func _on_JumpPad_body_entered(body):
-	#Checks the name of the Colliding object
-	if body.name == "Player" and !is_on_floor():
-		isCollidingJumpPad = true
-
-
-func _on_JumpArea_body_entered(body):
-	#Checks the name of the Colliding object
-	if body.name == "Player" and !is_on_floor():
-		isCollidingJumpPad = true

@@ -24,6 +24,10 @@ config/name="Super-Space-Gardener"
 run/main_scene="res://Scenes/Level/Main.tscn"
 config/icon="res://Assets/icon.png"
 
+[autoload]
+
+Global="*res://Scripts/global.gd"
+
 [debug]
 
 settings/fps/force_fps=144
