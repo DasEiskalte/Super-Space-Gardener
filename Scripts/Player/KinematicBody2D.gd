@@ -4,6 +4,7 @@ extends Actor
 export (float) var speedMultiplier = 1.25
 export (float) var crouchMultiplier = 0.75
 export (int) var jump = 1100
+export (int) var jumpPadHeigh = -2000
 var Multiplier = 1
 var canUncrouch = false
 var state = "idle"
@@ -17,7 +18,9 @@ func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	if Global.isCollidingJumpPad:	
-		_velocity.y = -3600
+		_velocity.y = jumpPadHeigh
+		_velocity.x = 0
+		move_and_slide(_velocity)
 		print(get_position())
 		print(Global.isCollidingJumpPad)
 		Global.isCollidingJumpPad = false
