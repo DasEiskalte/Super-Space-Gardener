@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 			state = "crouch"
 	elif canUncrouch and state != "walk" and state != "sprint" and state != "jump":
 		state = "idle"
-	if wallDirection != 0 and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
+	if wallDirection != 0 :
 		state = "wallSlide"
 	elif state == "wallSlide" && wallDirection == 0:
 		state = "idle"
