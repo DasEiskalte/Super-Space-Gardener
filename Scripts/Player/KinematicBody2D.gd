@@ -95,6 +95,11 @@ func _physics_process(delta: float) -> void:
 		$crouchHitbox.disabled = true
 		$AnimatedSprite.animation = "jumpAnimation"
 		Multiplier = 1
+	elif state == "wallSlide":
+		$defaultHitbox.disabled = false
+		$crouchHitbox.disabled = true
+		$AnimatedSprite.animation = "wallslide"
+		Multiplier = 3
 	
 	#Moves the Player
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Assets/Tilesets/tileset.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/KinematicBody2D.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Scenes/Nodes/Rock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Nodes/JumpPad.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Nodes/Finish.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Animations/Player/wallslide.png" type="Texture" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -321,6 +322,11 @@ animations = [ {
 "loop": true,
 "name": "crouch",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "wallslide",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=31]
@@ -341,6 +347,7 @@ tile_data = PoolIntArray( 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 
 position = Vector2( -120.339, -689.78 )
 script = ExtResource( 2 )
 speed = Vector2( 400, 1100 )
+gravity = 3500.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 position = Vector2( 160, 1138 )
@@ -484,6 +491,9 @@ position = Vector2( 2151.78, 1183.54 )
 
 [node name="JumpPad0" parent="JumpPads" instance=ExtResource( 17 )]
 position = Vector2( 516.586, 815.979 )
+
+[node name="JumpPad1" parent="JumpPads" instance=ExtResource( 17 )]
+position = Vector2( 1248.09, 1840.4 )
 
 [node name="Finish" parent="." instance=ExtResource( 18 )]
 position = Vector2( 2500, 970.344 )

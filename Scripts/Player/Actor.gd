@@ -9,4 +9,5 @@ var _velocity: = Vector2.ZERO
 
 #Velocity
 func _physics_process(delta: float) -> void:
-	_velocity.y += gravity * delta
+	if _velocity.y < 1500:
+		_velocity.y += gravity * delta
