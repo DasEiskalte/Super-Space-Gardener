@@ -9,9 +9,11 @@ var Multiplier = 1
 var canUncrouch = false
 var state = "idle"
 var wallDirection = 1
+var dash = load("res://Scripts/Classes/dash.gd").new()
 
 func _physics_process(delta: float) -> void:
-	#Calculates gravity, direction and velocity
+	print(dash.checkIfDashed())
+	#Calculates gravity, direction and vinelocity
 	var space_state = get_world_2d().direct_space_state
 	var direction: = get_direction()
 	#print(Global.isCollidingJumpPad)
